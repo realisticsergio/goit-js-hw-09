@@ -50,7 +50,7 @@ const markup = images
     </li>`)
   .join("");
 
- 3. Додаємо розмітку в DOM//
+ // Додаємо розмітку в DOM//
 galleryContainer.innerHTML = markup;
 
 
