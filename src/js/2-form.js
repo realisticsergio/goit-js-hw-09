@@ -1,10 +1,9 @@
-// 1. Порожня коробочка
 const formData = { email: "", message: "" };
 
 const form = document.querySelector(".feedback-form");
 const STORAGE_KEY = "feedback-form-state";
 
-// 2. Згадуємо минуле при завантаженні
+
 const savedData = localStorage.getItem(STORAGE_KEY);
 if (savedData) {
   const parsedData = JSON.parse(savedData);
@@ -14,24 +13,26 @@ if (savedData) {
   form.elements.message.value = formData.message;
 }
 
-// 3. Слухаємо кожен "тиць" по клавішах
-form.addEventListener("input", (event) => {
-  formData[event.target.name] = event.target.value.trim();
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-});
 
-// 4. Натискання на кнопку "Submit"
+form.addEventListener("input", (event) => {
+  const fieldName = event.target.name;
+  const fieldValue = event.target.value.trim();
+  event.target.value = fieldValue;
+
+  formData[fieldName] = fieldValue;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+  });
+// Натискання на кнопку "Submit"
 form.addEventListener("submit", (event) => {
   event.preventDefault(); // Щоб сторінка не стрибала
 
-  if (formData.email === "" || formData.message === "") {
+  if (!formData.email || !formData.message) {
     alert("Fill please all fields");
     return;
   }
 
-  console.log(formData); // Показуємо скарби
+  console.log(formData); 
 
-  // ПРИБИРАННЯ
   localStorage.removeItem(STORAGE_KEY);
   formData.email = "";
   formData.message = "";

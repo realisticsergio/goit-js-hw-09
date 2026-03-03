@@ -1,7 +1,7 @@
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-// 1. Оновлений масив об'єктів (preview — для списку, original — для модалки)
+
 const images = [
   {
     preview: "https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
@@ -37,21 +37,24 @@ const images = [
 
 const galleryContainer = document.querySelector('.gallery');
 
-// 2. Створюємо розмітку (використовуємо правильні властивості)
+
 const markup = images
   .map(({ preview, original, description }) => 
     `<li class="gallery-item">
       <a class="gallery-link" href="${original}">
-        <img class="gallery-image" src="${preview}" alt="${description}" />
+        <img class="gallery-image" src="${preview}" alt="${description}"
+        width="360" 
+        height="200"
+       />
       </a>
     </li>`)
   .join("");
 
-// 3. Додаємо розмітку в DOM
+ 3. Додаємо розмітку в DOM//
 galleryContainer.innerHTML = markup;
 
-// 4. Ініціалізуємо бібліотеку
+
 new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',   // брати підпис з атрибута alt
-  captionDelay: 250,    // показувати через 250мс
+  captionsData: 'alt',   
+  captionDelay: 250,  
 });
